@@ -1,0 +1,60 @@
+model: ms-tcn
+stages: ['dilated', 'dilated', 'dilated', 'dilated']
+n_features: 64
+dilated_n_layers: 10
+kernel_size: 15
+
+# loss function
+ce: True    # cross entropy
+tmse: True    # temporal mse
+tmse_weight: 0.15 # e l ##log 0.15
+
+class_weight: False    # if you use class weight to calculate cross entropy or not
+
+batch_size: 1
+
+# the number of input feature channels
+in_channel: 2048
+
+# thresholds for calcualting F1 Score
+thresholds: [0.1, 0.25, 0.5]
+
+num_workers: 4
+max_epoch: 50
+
+optimizer: Adam
+scheduler: None  #onplateau None
+
+learning_rate: 0.0005
+lr_factor: 0.1       # Patience of LR scheduler
+lr_patience: 10       # Patience of LR scheduler
+momentum: 0.9         # momentum of SGD
+dampening: 0.0        # dampening for momentum of SGD
+weight_decay: 0.0001  # weight decay
+nesterov: True        # enables Nesterov momentum
+final_lr: 0.1         # final learning rate for AdaBound
+poly_power: 0.9       # for polunomial learning scheduler
+
+
+
+step: [300]
+warm_up_epoch: 0
+
+
+param_groups: False
+param_search: False
+
+device: 1
+
+lbs: False
+lbs_burr: 30
+lbs_window: 90
+lbs_Confidence: 6
+
+dataset: 50salads
+dataset_dir: ./dataset/
+csv_dir: ./csv
+split: 2
+
+result_path: ./result/50salads/ms-tcn
+
